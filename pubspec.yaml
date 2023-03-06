@@ -1,0 +1,37 @@
+name: flutter_app_check_example
+description: A new Flutter project.
+publish_to: 'none'
+version: 0.1.0
+
+environment:
+  sdk: '>=2.19.3 <3.0.0'
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+  #Firebase
+  cloud_firestore: 4.4.3
+  cloud_functions: 4.0.11
+  firebase_storage: 11.0.14
+  firebase_core: 2.7.0
+  firebase_auth: 4.2.9
+  firebase_app_check: 0.1.1+12
+  firestore_cache: ^2.3.0+1
+  google_sign_in: 5.4.3
+
+  #StateManagement & Singleton
+  get: 4.6.5
+
+  #Security
+  device_info_plus: 8.1.0
+  get_storage: 2.0.3
+  safe_device: 1.1.2
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^2.0.0
+
+flutter:
+  uses-material-design: true
