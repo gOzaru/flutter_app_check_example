@@ -14,10 +14,9 @@ Future<void> main() async {
 Future start() async {
   WidgetsFlutterBinding.ensureInitialized();
   await SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
-  await Firebase.initializeApp().then((value) async {
-    await FirebaseAppCheck.instance.activate();
-    await Get.putAsync(() => Cloud().init());
-  });
+  await Firebase.initializeApp();
+  await FirebaseAppCheck.instance.activate();
+  await Get.putAsync(() => Cloud().init());
 }
 
 class MainApp extends StatelessWidget {
@@ -41,21 +40,10 @@ class MainApp extends StatelessWidget {
 
   void signUp() async {
     await cloud.signUpWithGoogle().then((value) {
-      if (value["system"] == "success") {
+      if (value.isEmpty) {
         Get.defaultDialog(
           title: "Message",
-          middleText: value["message"],
-          confirm: ElevatedButton(
-            onPressed: () {
-              Get.offAll(() => MainMenu());
-            },
-            child: const Text("Ok"),
-          ),
-        );
-      } else {
-        Get.defaultDialog(
-          title: "Warning",
-          middleText: value["message"],
+          middleText: "The data is empty\nError from server. App will be closed",
           confirm: ElevatedButton(
             onPressed: () {
               SystemNavigator.pop();
@@ -64,6 +52,31 @@ class MainApp extends StatelessWidget {
             child: const Text("Ok"),
           ),
         );
+      } else {
+        if (value["system"] == "success") {
+          Get.defaultDialog(
+            title: "Message",
+            middleText: value["message"],
+            confirm: ElevatedButton(
+              onPressed: () {
+                Get.offAll(() => MainMenu());
+              },
+              child: const Text("Ok"),
+            ),
+          );
+        } else {
+          Get.defaultDialog(
+            title: "Warning",
+            middleText: value["message"],
+            confirm: ElevatedButton(
+              onPressed: () {
+                SystemNavigator.pop();
+                exit(0);
+              },
+              child: const Text("Ok"),
+            ),
+          );
+        }
       }
     });
   }

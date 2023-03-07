@@ -58,12 +58,10 @@ class Cloud extends GetxService {
         );
         await auth.signInWithCredential(credential).then((values) async {
           userSecret = values;
-          await authGoogle(values).then((value) {
-            if (value.isNotEmpty) {
-              result = Map<String, dynamic>.from(value);
-            } else {
-              log("Output from function authGoogle is empty [Toggle Emulator]");
-            }
+          log("User secret is: $userSecret");
+          await authGoogle(userSecret!).then((value) {
+            log("Output is $value");
+            result = Map<String, dynamic>.from(value);
           });
         });
       }
@@ -112,6 +110,7 @@ class Cloud extends GetxService {
   Future<Map<String, dynamic>> registerUser(UserCredential credential) async {
     Map<String, dynamic> result = {};
     try {
+      log("Calling Cloud Function");
       HttpsCallable userAuth = functions.httpsCallable("ServerSignUp");
       dataUser = {
         "name": displayName,
