@@ -141,10 +141,10 @@ packages:
     dependency: "direct main"
     description:
       name: firebase_app_check
-      sha256: cf7666786429d32ae0af9b40e1ce6b0739b1e01a3d574881f8bd3f8dfafa6bca
+      sha256: "88f052cfc9db26b1b83d3625be8ea9c18ef1af477e6224acb7642c48a9ac0a17"
       url: "https://pub.dev"
     source: hosted
-    version: "0.1.1+4"
+    version: "0.1.1+13"
   firebase_app_check_platform_interface:
     dependency: transitive
     description:

@@ -15,7 +15,7 @@ Future start() async {
   WidgetsFlutterBinding.ensureInitialized();
   await SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
   await Firebase.initializeApp();
-  await FirebaseAppCheck.instance.activate();
+  await FirebaseAppCheck.instance.activate(androidProvider: AndroidProvider.playIntegrity);
   await Get.putAsync(() => Cloud().init());
 }
 
